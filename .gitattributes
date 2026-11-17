@@ -1,0 +1,3 @@
+# Godot's own convention: keep line endings as LF on every machine, so scene
+# and script files do not change when the project is opened on Windows.
+* text=auto eol=lf

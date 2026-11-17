@@ -1,0 +1,15 @@
+# Godot 4 import cache and editor data (rebuilt automatically)
+.godot/
+
+# Exported games. build/.gdignore stays in git: it tells Godot not to scan the
+# exported files (otherwise it creates .import files next to the exported PNGs).
+build/*
+!build/.gdignore
+*.apk
+*.aab
+
+# Editors and OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
