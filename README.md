@@ -67,6 +67,7 @@ tools/
     smoke_test.gd    automated check of the game rules (see below)
     balance_test.gd  plays whole games with scripted players to check the difficulty
     screenshot.gd    saves the pictures in docs/
+    zip_web_build.py zips the web export for itch.io (see below)
 export_presets.cfg   a ready "Web" export (single-threaded, so it needs no special server settings)
 ```
 
@@ -259,6 +260,28 @@ To retake the screenshots in `docs/` (this opens a game window for a couple of s
 ```bash
 godot --path . --script res://tools/screenshot.gd
 ```
+
+## Export for itch.io
+
+The project includes a ready "Web" export preset (`export_presets.cfg`). It makes a single-threaded build, so it needs no special server settings.
+
+1. One time only: install the Web export templates that match your Godot version (in Godot: **Editor > Manage Export Templates > Download and Install**).
+2. From this folder, export the game and zip it:
+
+```bash
+godot --headless --path . --export-release "Web" build/web/index.html
+python tools/zip_web_build.py
+```
+
+This writes `build/hold-the-line-web.zip` (about 10 MB). The `build/` folder is not kept in git, apart from `build/.gdignore`, which stops Godot from scanning the exported files.
+
+To try the build on your own computer before uploading, serve the folder over HTTP (browsers will not run it from a `file://` address) and open http://localhost:8061:
+
+```bash
+python -m http.server 8061 --directory build/web
+```
+
+On itch.io: **Create new project**, set *Kind of project* to **HTML**, upload `hold-the-line-web.zip` and tick **This file will be played in the browser**. Set the viewport size to **960 x 540** and tick **Fullscreen button**. The game is made for a mouse and keyboard; touch screens are untested.
 
 ## What is and isn't checked
 
